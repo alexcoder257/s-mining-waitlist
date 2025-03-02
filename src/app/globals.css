@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F4F8F8;
+  --error:#E10500;
+  --link:#00A9E1;
+  --warning:#EFA80F;
+  --success:#0BA83E;
+  --neutrals-1:#F2F2F2;
+  --neutrals-2:#DBDBDB;
+  --neutrals-3:#B5B5B5;
+  --neutrals-4:#6E6E6E;
+  --neutrals-5:#505050;
+  --neutrals-6:#262626;
+  --disable:#C2C2C2;
+  --text-3:#B5B5B5;
+  --text-2:#6E6E6E;
+  --text-1:#262626;
+  --brand_main:#0BA83E;
+  --brand_1:#DDF9E6;
+  --brand_2:#ABEDC2;
+  --brand_3:#31D366;
+  --brand_4:#1D8740;
+  --brand_5:#126630;
+  --brand_6:#0C431F;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #F4F8F8;
+  }
+}
+
+body {
+  background: var(--background);
+  font-family: 'Reddit Sans', sans-serif;
+}
