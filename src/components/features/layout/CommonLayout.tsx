@@ -5,5 +5,9 @@ export default function CommonLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return (
+    <div className="bg-[url('/images/background.png')] bg-cover min-h-screen bg-no-repeat">
+      {children}
+    </div>
+  );
 }

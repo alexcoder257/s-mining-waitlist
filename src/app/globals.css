@@ -19,12 +19,9 @@
   --text-2:#6E6E6E;
   --text-1:#262626;
   --brand_main:#0BA83E;
-  --brand_1:#DDF9E6;
-  --brand_2:#ABEDC2;
-  --brand_3:#31D366;
-  --brand_4:#1D8740;
-  --brand_5:#126630;
-  --brand_6:#0C431F;
+  --brand_1:#40ADFF;
+  --brand_2:#5054FD;
+  --brand_1_hover:#2F35FD
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,5 +32,4 @@
 
 body {
   background: var(--background);
-  font-family: 'Reddit Sans', sans-serif;
 }
