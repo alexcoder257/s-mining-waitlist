@@ -50,6 +50,7 @@ export default {
           "linear-gradient(91deg, rgba(30, 27, 56, 0.55) -43.35%, rgba(30, 27, 56, 0.00) 111.82%)",
         gradient_tab:
           "linear-gradient(91deg, rgba(30, 27, 56, 0.00) -43.35%, rgba(30, 27, 56, 0.55) 111.82%)",
+        gradient_success: "linear-gradient(58deg, #FFF 17.1%, #D587FB 196.45%)",
       },
       backdropBlur: {
         custom: "9.3px",

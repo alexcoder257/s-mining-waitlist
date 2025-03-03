@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import CommonLayout from "@/components/features/layout/CommonLayout";
 
 export const metadata: Metadata = {
   title: "S-mining",
@@ -20,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
-      <body className={`text-sm text-white  antialiased`}>
-        <CommonLayout>{children}</CommonLayout>
-      </body>
+      <body className={`text-sm text-white  antialiased`}>{children}</body>
     </html>
   );
 }
