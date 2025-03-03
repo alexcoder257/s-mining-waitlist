@@ -223,6 +223,7 @@ export default function Home() {
         name: data.name,
         email: data.email,
         phone: data.phone,
+        package: packages.find((item) => item.id === activePackage.id)?.id,
       };
       // Todo: Call API add waitlist user
       const res = await fetchApi.post("/register-waitlist", payload);
