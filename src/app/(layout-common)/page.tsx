@@ -149,7 +149,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [walletAddress, setWalletAddress] = useState<string>("");
 
-  // const [orderId, setOrderId] = useState<number | null>();
+  const [userId, setUserId] = useState<number | null>();
 
   console.log({ activePackage, selectedValue, paymentStatus, walletAddress });
 
@@ -172,8 +172,8 @@ export default function Home() {
   const checkPaymentStatus = async () => {
     try {
       // Todo: fetch payment status
-      const res = await fetchApi.post("/payment-status", {
-        userId: 1,
+      const res = await fetchApi.post("/waitlist/complete", {
+        userId: userId,
       });
       if (res.completed) {
         setPaymentStatus(PAYMENT_STATUS.COMPLETE);
@@ -206,7 +206,7 @@ export default function Home() {
     try {
       setIsLoading(true);
       // Todo: Fetch API wallet address
-      const res = await fetchApi.get("/wallet-address");
+      const res = await fetchApi.get("/waitlist/get-wallet");
       if (res) {
         setWalletAddress(res.address);
       }
@@ -225,10 +225,10 @@ export default function Home() {
         phone: data.phone,
       };
       // Todo: Call API add waitlist user
-      const res = await fetchApi.post("/wait-list");
+      const res = await fetchApi.post("/register-waitlist");
       setIsOpenPreorderModal(false);
       setIsOpenPaymentModal(true);
-      // setOrderId(1);
+      setUserId(res.userId);
     } catch (error) {
       console.log(error);
     }
