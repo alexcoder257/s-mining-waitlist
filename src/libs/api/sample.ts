@@ -1,9 +1,8 @@
-import * as Type from "@/types";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getHeaders = (
   requireToken: boolean,
-  tokenValue?: Type.SampleToken,
+  tokenValue?: any,
   isFile?: boolean
 ): Headers => {
   const headers = new Headers();
@@ -19,7 +18,7 @@ const getHeaders = (
   return headers;
 };
 
-const getQueryParams = (queryParams: Type.SampleQuery): string => {
+const getQueryParams = (queryParams: any): string => {
   const query = Object.entries(queryParams || {})
     .map(([key, value]) => `${key}=${value}`)
     .join("&");
@@ -30,9 +29,9 @@ const getQueryParams = (queryParams: Type.SampleQuery): string => {
 const fetchApi = {
   get: async <T>(
     path: string,
-    queryParams?: Type.SampleQuery,
+    queryParams?: any,
     needToken?: boolean,
-    tokenValue?: Type.SampleToken,
+    tokenValue?: any,
     cacheType?: RequestCache
   ): Promise<T> => {
     try {
@@ -57,39 +56,41 @@ const fetchApi = {
       throw error;
     }
   },
-  post: async <T>(
+  post: async (
     path: string,
-    queryParams?: Type.SampleQuery,
-    tokenValue?: Type.SampleToken,
+    payload?: any,
+    needToken?: boolean,
+    queryParams?: object,
     cacheType?: RequestCache
-  ): Promise<T> => {
+  ) => {
     try {
-      const headers = getHeaders(true, tokenValue);
+      const headers = getHeaders(needToken || false);
       const url = new URL(`${BASE_URL}${path}`);
       const query = queryParams ? getQueryParams(queryParams) : "";
 
-      const res = await fetch(`${url}${query}`, {
+      const option: any = {
         method: "POST",
         headers,
-        credentials: "include",
         cache: cacheType || "no-store",
-      });
+      };
+      if (payload) {
+        option.body = JSON.stringify(payload);
+      }
+      const res = await fetch(`${url}${query}`, option);
 
       if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
+        const errorData = await res.json();
+        const errorMessage = errorData.message || "An error occurred";
+        throw new Error(errorMessage);
       }
 
-      const response = (await res.json()) as T;
+      const response = await res.json();
       return response;
     } catch (error) {
       throw error;
     }
   },
-  fileUpload: async (
-    path: string,
-    file: File,
-    tokenValue?: Type.SampleToken
-  ) => {
+  fileUpload: async (path: string, file: File, tokenValue?: any) => {
     try {
       const headers = getHeaders(true, tokenValue, true);
       const url = new URL(`${BASE_URL}${path}`);
