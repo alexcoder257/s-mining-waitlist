@@ -206,7 +206,7 @@ export default function Home() {
     try {
       setIsLoading(true);
       // Todo: Fetch API wallet address
-      const res = await fetchApi.get("/waitlist/get-wallet");
+      const res = await fetchApi.post("/waitlist/get-wallet");
       if (res) {
         setWalletAddress(res.address);
       }
@@ -225,7 +225,7 @@ export default function Home() {
         phone: data.phone,
       };
       // Todo: Call API add waitlist user
-      const res = await fetchApi.post("/register-waitlist");
+      const res = await fetchApi.post("/register-waitlist", payload);
       setIsOpenPreorderModal(false);
       setIsOpenPaymentModal(true);
       setUserId(res.userId);
