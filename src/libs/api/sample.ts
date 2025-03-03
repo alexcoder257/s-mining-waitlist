@@ -1,5 +1,5 @@
 import * as Type from "@/types";
-const SAMPLE_API_BASE_URL = process.env.NEXT_PUBLIC_SAMPLE_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const getHeaders = (
   requireToken: boolean,
@@ -27,7 +27,7 @@ const getQueryParams = (queryParams: Type.SampleQuery): string => {
   return `?${query}`;
 };
 
-const fetchSample = {
+const fetchApi = {
   get: async <T>(
     path: string,
     queryParams?: Type.SampleQuery,
@@ -37,7 +37,7 @@ const fetchSample = {
   ): Promise<T> => {
     try {
       const headers = getHeaders(needToken || false, tokenValue);
-      const url = new URL(`${SAMPLE_API_BASE_URL}${path}`);
+      const url = new URL(`${BASE_URL}${path}`);
       const query = queryParams ? getQueryParams(queryParams) : "";
 
       const res = await fetch(`${url}${query}`, {
@@ -65,7 +65,7 @@ const fetchSample = {
   ): Promise<T> => {
     try {
       const headers = getHeaders(true, tokenValue);
-      const url = new URL(`${SAMPLE_API_BASE_URL}${path}`);
+      const url = new URL(`${BASE_URL}${path}`);
       const query = queryParams ? getQueryParams(queryParams) : "";
 
       const res = await fetch(`${url}${query}`, {
@@ -92,7 +92,7 @@ const fetchSample = {
   ) => {
     try {
       const headers = getHeaders(true, tokenValue, true);
-      const url = new URL(`${SAMPLE_API_BASE_URL}${path}`);
+      const url = new URL(`${BASE_URL}${path}`);
 
       const formData = new FormData();
       formData.append(
@@ -119,4 +119,4 @@ const fetchSample = {
   },
 };
 
-export default fetchSample;
+export default fetchApi;

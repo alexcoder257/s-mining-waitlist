@@ -78,22 +78,24 @@ export default function Drawer({
         );
       default:
         return (
-          <div className="flex justify-between items-center py-5 px-6 rounded-t-2xl overflow-hidden border-b border-neutrals_1">
-            <p className="text-xl leading-6 font-bold">{title}</p>
-            {!hiddenClose && (
-              <div className="border border-[#D9D9D9] rounded-lg p-2">
-                <Icon
-                  name="cancel"
-                  width="16px"
-                  height="16px"
-                  color="#1E1E1E"
-                  stroke="#1E1E1E"
-                  onClick={onClose}
-                  className="cursor-pointer"
-                />
-              </div>
-            )}
-          </div>
+          title && (
+            <div className="flex justify-between items-center py-5 px-6 rounded-t-2xl overflow-hidden border-b border-neutrals_1">
+              <p className="text-xl leading-6 font-bold">{title}</p>
+              {!hiddenClose && (
+                <div className="border border-[#D9D9D9] rounded-lg p-2">
+                  <Icon
+                    name="cancel"
+                    width="16px"
+                    height="16px"
+                    color="#1E1E1E"
+                    stroke="#1E1E1E"
+                    onClick={onClose}
+                    className="cursor-pointer"
+                  />
+                </div>
+              )}
+            </div>
+          )
         );
     }
   };

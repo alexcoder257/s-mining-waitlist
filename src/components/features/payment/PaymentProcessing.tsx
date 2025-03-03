@@ -21,6 +21,8 @@ export default function PaymentProcessing({
   const [showModalPaymentNotify, setShowModalPaymentNotify] =
     useState<boolean>(false);
 
+  console.log({ paymentStatus });
+
   useEffect(() => {
     if (
       ![
@@ -53,27 +55,31 @@ export default function PaymentProcessing({
 
       return () => clearInterval(timer);
     } else if (paymentStatus === PAYMENT_STATUS.CANCELED) {
+      console.log("ACTIVEEEE");
       setShowModalPaymentNotify(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [paymentStatus]);
 
   return (
     <div className="p-6">
-      <div className="text-center text-[24px]/[29px] font-[700] lg:hidden mb-2">
+      <div className="text-center text-[24px]/[29px] font-[700] mb-2">
         Payment processing
       </div>
       <p className="text-center text-[#B3B3B3] text-xs mb-8">
         Please wait while we verify your payment.
       </p>
-      <ModalPaymentNotify
-        open={showModalPaymentNotify}
-        onCancel={() => {
-          setShowModalPaymentNotify(false);
-          onCancel?.();
-        }}
-        status={paymentStatus}
-      />
+      {paymentStatus === PAYMENT_STATUS.CANCELED && (
+        <ModalPaymentNotify
+          open={showModalPaymentNotify}
+          onCancel={() => {
+            setShowModalPaymentNotify(false);
+            onCancel?.();
+          }}
+          status={paymentStatus}
+        />
+      )}
+
       <SemiCircularProgress value={countTransfer} max={paymentAmount} />
       <button
         className="text-base w-full h-12 border border-[#D9D9D9] rounded-lg font-semibold"

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useMemo } from "react";
-import { Modal as AntdModal } from "antd";
 import Icon from "@/components/share/Icon";
 import { PAYMENT_STATUS } from "@/constant/enum";
+import { Modal as AntdModal } from "antd";
+import { useMemo } from "react";
 
 type ModalPaymentNotifyProps = {
   open: boolean;
@@ -16,6 +16,7 @@ export default function ModalPaymentNotify({
   status,
 }: ModalPaymentNotifyProps) {
   const infoTextMemo: any = useMemo(() => {
+    if (!status) return;
     switch (status) {
       //   case PAYMENT_STATUS.PROCESSING:
       //   case PAYMENT_STATUS.COMPLETE:
@@ -73,7 +74,9 @@ export default function ModalPaymentNotify({
         </p>
         <button
           className="mt-6 border border-[#D9D9D9] rounded-lg h-10 w-full text-[16px]/[24px] font-semibold"
-          onClick={onCancel}
+          onClick={() => {
+            window.location.reload();
+          }}
         >
           Back to dashboard
         </button>

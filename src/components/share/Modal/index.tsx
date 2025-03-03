@@ -38,19 +38,22 @@ const Modal: React.FC<ModalProps> = ({
       maskClosable={maskClosable}
       className={classNames("custom-modal", className)}
     >
-      <div className="flex justify-between pb-6 border-[#F2F2F2] border-b-[1px] p-6 max-lg:hidden">
-        <p className="leading-8 font-bold text-2xl text-1 text-ellipsis overflow-hidden whitespace-nowrap ">
-          {title}
-        </p>
-        {!hiddenClose && (
-          <div
-            className="w-8 h-8 flex items-center justify-center border-[1px] border-neutrals rounded-[40px] box-border hover:bg-neutrals_2 hover:border-neutrals_4 cursor-pointer"
-            onClick={onCancel}
-          >
-            <Icon name="cancel" width="16px" height="16px" />
-          </div>
-        )}
-      </div>
+      {!hiddenClose && title && (
+        <div className="flex justify-between pb-6 border-[#F2F2F2] border-b-[1px] p-6 max-lg:hidden">
+          <p className="leading-8 font-bold text-2xl text-1 text-ellipsis overflow-hidden whitespace-nowrap ">
+            {title}
+          </p>
+          {!hiddenClose && (
+            <div
+              className="w-8 h-8 flex items-center justify-center border-[1px] border-neutrals rounded-[40px] box-border hover:bg-neutrals_2 hover:border-neutrals_4 cursor-pointer"
+              onClick={onCancel}
+            >
+              <Icon name="cancel" width="16px" height="16px" />
+            </div>
+          )}
+        </div>
+      )}
+
       <div
         className={classNames(
           "relative hidden max-lg:flex items-center justify-start ",
@@ -62,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({
         </p>
         {!hiddenClose && (
           <div
-            className="absolute right-[24px] p-2 border border-[#D9D9D9] rounded-lg"
+            className="absolute right-[24px] p-2 border border-[#D9D9D9] rounded-lg cursor-pointer"
             onClick={onCancel}
           >
             <Icon name="cancel" height="16px" width="16px" stroke="#1E1E1E" />
